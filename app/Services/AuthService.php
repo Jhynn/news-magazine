@@ -4,12 +4,13 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthService
 {
-	public function index()
+	public function index(): array
     {
         $tokens = auth()->user()->tokens()
                 ->get()->map(function ($item) {
@@ -23,34 +24,32 @@ class AuthService
                     return $aux;
                 });
 
-        return $tokens;
+        return $tokens->toArray();
     }
 
     public function store(array $properties)
     {
-        if (Auth::attempt(['email' => $properties['email_or_username'], 'password' => $properties['password']]) ||
-                Auth::attempt(['username' => $properties['email_or_username'], 'password' => $properties['password']])
-            ) {
-                $user = User::where('email', $properties['email_or_username'])
-                    ->orWhere('username', $properties['email_or_username'])
-                    ->first();
+        $user = User::where('email', $properties['email_or_username'])
+            ->orWhere('username', $properties['email_or_username'])
+            ->first();
 
-                if ($user->status === 'inactive')
-                    throw new \Exception('this user is inactive', Response::HTTP_FORBIDDEN);
+        if (!$user || !Hash::check($properties['password'], $user->password))
+            throw new \Exception(__('auth.failed'), Response::HTTP_UNAUTHORIZED);
 
-                $token = explode('|', auth()->user()->createToken($properties['token_name'] ?? 'login-frontend')->plainTextToken);
+        if ($user->status === 'inactive')
+            throw new \Exception('this user is inactive', Response::HTTP_FORBIDDEN);
 
-                return response()->json([
-                    'data' => [
-                        'name' => $properties['token_name'] ?? 'login-frontend',
-                        'token' => $token[1],
-                        'role' => $user->getRoleNames()->first(),
-                        'permissions' => $user->getAllPermissionsAPI(),
-                    ],
-                ]);
-            }
+        $token = explode(
+            '|', $user->createToken($properties['token_name'] ?? '')
+            ->plainTextToken
+        );
 
-        throw new \Exception(__('auth.failed'));
+        return [
+            'name' => $properties['token_name'] ?? "token_{$token[0]}",
+            'token' => $token[1],
+            // 'role' => $user->getRoleNames()->first(),
+            // 'permissions' => $user->getAllPermissionsAPI(),
+        ];
     }
 
     public function destroy(Request $request)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthStoreRequest;
 use App\Http\Resources\TokenResource;
 use App\Services\AuthService;
 use App\Traits\ApiCommonResponses;
@@ -29,10 +30,10 @@ class AuthController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AuthStoreRequest $request)
     {
         try {
-            $this->service->store($request->validated());
+            return $this->success($this->service->store($request->validated()));
         } catch (\Exception $e) {
             return $this->error($e);
         }

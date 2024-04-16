@@ -1,6 +1,6 @@
 # News magazine
 
-That's the backend for a news manager system, this manager covers all the essential for publish news, posts, blogs, tutorials, articles reviews and the like. In addition a friend of mine, [Houston](), made a [front-end client]() for this backend, so you can use it _already_.
+That's the backend for a news manager system, this manager covers all the essential for publish news, posts, blogs, tutorials, articles reviews and the like. In addition a friend of mine, [Houston](https://github.com/houstonsbarros/), made a [front-end client](https://github.com/houstonsbarros/news_magazine) for this backend, so you can use it _already_.
 
 ## Features
 
@@ -70,6 +70,11 @@ That's the backend for a news manager system, this manager covers all the essent
     - [ ] The most popular
         - [ ] Filter by a date interval
 - [ ] Search simultaneously for authors, topics and news
+- [ ] Statistics
+    - [ ] Given a time interval, you can see
+        - [ ] The most viewed author
+        - [ ] The most viewed topic
+        - [ ] The most viewed news article
 - [ ] Comments
     - [ ] Activate or deactivate a social network
 
