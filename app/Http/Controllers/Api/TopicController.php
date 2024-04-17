@@ -43,7 +43,7 @@ class TopicController extends Controller
         try {
             $payload = $this->service->store($request->validated());
 
-            return TopicResource::collection($payload)->response();
+            return (new TopicResource($payload))->response();
         } catch (Throwable $th) {
             return $this->error($th);
         }
@@ -57,7 +57,7 @@ class TopicController extends Controller
         try {
             $payload = $this->service->show($topic);
 
-            return TopicResource::collection($payload)->response();
+            return TopicResource::make($payload)->response();
         } catch (Throwable $th) {
             return $this->error($th);
         }
@@ -71,7 +71,7 @@ class TopicController extends Controller
         try {
             $payload = $this->service->update($request->validated(), $topic);
 
-            return TopicResource::collection($payload)->response();
+            return TopicResource::make($payload)->response();
         } catch (Throwable $th) {
             return $this->error($th);
         }
@@ -85,7 +85,7 @@ class TopicController extends Controller
         try {
             $payload = $this->service->destroy($topic);
 
-            return TopicResource::collection($payload)->response();
+            return TopicResource::make($payload)->response();
         } catch (Throwable $th) {
             return $this->error($th);
         }

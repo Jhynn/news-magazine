@@ -24,8 +24,10 @@ trait ApiCommonResponses
 
 	public function error(Exception|Throwable $e): JsonResponse
     {
+        $code = $e->getCode();
+
         return response()->json([
             'message' => $e->getMessage(),
-        ], $e->getCode() ? $e->getCode() : Response::HTTP_BAD_REQUEST);
+        ], (gettype($code) == 'integer' && $code != 0) ? $code : Response::HTTP_BAD_REQUEST);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Topic;
+use App\Observers\TopicObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Obserservers
+        Topic::observe(TopicObserver::class);
     }
 }
