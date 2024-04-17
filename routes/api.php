@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\{
+    AuthController,
+    TopicController
+};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', function () {
@@ -20,4 +23,6 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/logout', 'destroy');
         Route::delete('/revoke-all-tokens', 'revokeAllMyTokens');
     });
+
+    Route::apiResource('/topics', TopicController::class);
 });

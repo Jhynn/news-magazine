@@ -2,8 +2,10 @@
 
 namespace App\Traits;
 
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Throwable;
 
 trait ApiCommonResponses
 {
@@ -20,10 +22,10 @@ trait ApiCommonResponses
         ], Response::HTTP_OK);
     }
 
-	public function error(\Exception $e): JsonResponse
+	public function error(Exception|Throwable $e): JsonResponse
     {
         return response()->json([
             'message' => $e->getMessage(),
-        ], $e->getCode() ?? Response::HTTP_BAD_REQUEST);
+        ], $e->getCode() ? $e->getCode() : Response::HTTP_BAD_REQUEST);
     }
 }

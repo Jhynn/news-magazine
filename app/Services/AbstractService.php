@@ -41,17 +41,20 @@ class AbstractService implements ServiceInterface
     /**
 	 * @inheritDoc
 	 */
-	public function show(int $id): Model|null
+	public function show(int|Model $resource): Model|null
     {
-        return $this->model->findOrFail($id);
+        if (gettype($resource) == 'integer')
+            return $this->model->findOrFail($resource);
+
+        return $resource;
     }
 
 	/**
 	 * @inheritDoc
 	 */
-	public function update(array $properties, int $id): Model|null
+	public function update(array $properties, int|Model $resource): Model|null
     {
-        $tmp = $this->show($id);
+        $tmp = $this->show($resource);
         $tmp->update($properties);
 
         return $tmp;
@@ -60,9 +63,9 @@ class AbstractService implements ServiceInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function destroy(int $id, array $aux=null): Model|null
+	public function destroy(int|Model $resource, array $aux=null): Model|null
     {
-        $tmp = $this->show($id);
+        $tmp = $this->show($resource);
         $tmp->delete();
 
         return $tmp;
