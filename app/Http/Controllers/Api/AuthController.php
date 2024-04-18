@@ -58,9 +58,15 @@ class AuthController extends Controller
     public function revokeAllMyTokens()
     {
         try {
-            auth()->user()->tokens()->delete();
+            /** @var $user \App\Models\User */
+            $user = auth()->user();
+            $user->tokens()->delete();
 
-            return $this->success([], ['message' => __('success')]);
+            return $this->success(
+                [], [
+                    'message' => __('the :resource were :action', 
+                    ['resource' => 'tokens', 'action' => __('deleted')])
+                ]);
         } catch (\Exception $e) {
             return $this->error($e);
         }
