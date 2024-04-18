@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\{
+    ArticleController,
     AuthController,
     TopicController
 };
@@ -25,4 +26,5 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 
     Route::apiResource('/topics', TopicController::class);
+    Route::apiResource('/articles', ArticleController::class);
 });

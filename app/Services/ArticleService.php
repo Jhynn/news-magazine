@@ -2,17 +2,17 @@
 
 namespace App\Services;
 
-use App\Models\Topic;
+use App\Models\Article;
 
-class TopicService extends AbstractService
+class ArticleService extends AbstractService
 {
-	protected $model = Topic::class;
+	protected $model = Article::class;
 
 	public function store(array $properties): \Illuminate\Database\Eloquent\Model|null
 	{
 		/** @var $user \App\Models\User */
 		$user = auth()->user();
 
-		return $user->topics()->create($properties);
+		return $user->articles()->create($properties);
 	}
 }
