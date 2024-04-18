@@ -26,7 +26,7 @@ class ArticleController extends Controller
     public function index(ArticleShowRequest $request)
     {
         try {
-            return ArticleResource::collection($this->service->index($request));
+            return ArticleResource::collection($this->service->index($request))->response();
         } catch (\Throwable $th) {
             $this->error($th);
         }
@@ -38,7 +38,12 @@ class ArticleController extends Controller
     public function store(ArticleStoreRequest $request)
     {
         try {
-            return ArticleResource::make($this->service->store($request->validated()));
+            return ArticleResource::make($this->service->store($request->validated()))
+                ->additional([
+                    'message' => __(
+                        'the :resource was :action', ['resource' => __('article'), 'action' => __('created')]
+                    )
+                ])->response();
         } catch (\Throwable $th) {
             $this->error($th);
         }
@@ -50,7 +55,7 @@ class ArticleController extends Controller
     public function show(ArticleShowRequest $request, Article $article)
     {
         try {
-            return ArticleResource::make($this->service->show($article));
+            return ArticleResource::make($this->service->show($article))->response();
         } catch (\Throwable $th) {
             $this->error($th);
         }
@@ -62,7 +67,12 @@ class ArticleController extends Controller
     public function update(ArticleUpdateRequest $request, Article $article)
     {
         try {
-            return ArticleResource::make($this->service->update($request->validated(), $article));
+            return ArticleResource::make($this->service->update($request->validated(), $article))
+                ->additional([
+                    'message' => __(
+                        'the :resource was :action', ['resource' => __('article'), 'action' => __('updated')]
+                    )
+                ])->response();
         } catch (\Throwable $th) {
             $this->error($th);
         }
@@ -74,7 +84,12 @@ class ArticleController extends Controller
     public function destroy(ArticleDestroyRequest $request, Article $article)
     {
         try {
-            return ArticleResource::make($this->service->destroy($article));
+            return ArticleResource::make($this->service->destroy($article))
+                ->additional([
+                    'message' => __(
+                        'the :resource was :action', ['resource' => __('article'), 'action' => __('deleted')]
+                    )
+                ])->response();
         } catch (\Throwable $th) {
             $this->error($th);
         }

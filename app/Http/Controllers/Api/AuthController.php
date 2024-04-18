@@ -47,7 +47,9 @@ class AuthController extends Controller
         try {
             $token = $this->service->destroy($request);
 
-            return TokenResource::make($token)->additional(['message' => __('token_revoked')]);
+            return TokenResource::make($token)->additional([
+                'message' => __('the :resource was :action', ['resource' => 'token', 'action' => __('deleted')])
+            ]);
         } catch (\Exception $e) {
             return $this->error($e);
         }
@@ -58,7 +60,7 @@ class AuthController extends Controller
         try {
             auth()->user()->tokens()->delete();
 
-            return $this->success([], ['message' => __('all_tokens_revoked')]);
+            return $this->success([], ['message' => __('success')]);
         } catch (\Exception $e) {
             return $this->error($e);
         }

@@ -1,0 +1,10 @@
+{
+    "created": "created",
+    "updated": "updated",
+    "deleted": "deleted",
+
+    "success": "success",
+
+    "article": "article",
+    "the :resource was :action": "the :resource was :action"
+}

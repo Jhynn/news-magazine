@@ -43,7 +43,12 @@ class TopicController extends Controller
         try {
             $payload = $this->service->store($request->validated());
 
-            return (new TopicResource($payload))->response();
+            return TopicResource::make($payload)
+                ->additional([
+                    'message' => __(
+                        'the :resource was :action', ['resource' => __('topic'), 'action' => __('created')]
+                    )
+                ])->response();
         } catch (Throwable $th) {
             return $this->error($th);
         }
@@ -71,7 +76,12 @@ class TopicController extends Controller
         try {
             $payload = $this->service->update($request->validated(), $topic);
 
-            return TopicResource::make($payload)->response();
+            return TopicResource::make($payload)
+                ->additional([
+                    'message' => __(
+                        'the :resource was :action', ['resource' => __('topic'), 'action' => __('updated')]
+                    )
+                ])->response();
         } catch (Throwable $th) {
             return $this->error($th);
         }
@@ -85,7 +95,12 @@ class TopicController extends Controller
         try {
             $payload = $this->service->destroy($topic);
 
-            return TopicResource::make($payload)->response();
+            return TopicResource::make($payload)
+                ->additional([
+                    'message' => __(
+                        'the :resource was :action', ['resource' => __('topic'), 'action' => __('deleted')]
+                    )
+                ])->response();
         } catch (Throwable $th) {
             return $this->error($th);
         }
