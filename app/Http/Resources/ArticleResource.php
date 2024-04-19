@@ -18,9 +18,8 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
-            'user' => $this->author(),
-            // 'author' => new UserResource($this->whenLoaded('user')),
-            // 'topics' => TopicResource::collection($this->whenLoaded('topics')),
+            'author' => UserResource::make($this->whenLoaded('author')),
+            'topics' => TopicResource::collection($this->whenLoaded('topics')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

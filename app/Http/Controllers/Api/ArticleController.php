@@ -38,7 +38,8 @@ class ArticleController extends Controller
     public function store(ArticleStoreRequest $request)
     {
         try {
-            return ArticleResource::make($this->service->store($request->validated()))
+            $article = $this->service->store($request->validated());
+            return ArticleResource::make($article->loadMissing(['author', 'topics']))
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('article'), 'action' => __('created')]
@@ -55,7 +56,8 @@ class ArticleController extends Controller
     public function show(ArticleShowRequest $request, Article $article)
     {
         try {
-            return ArticleResource::make($this->service->show($article))->response();
+            return ArticleResource::make($article->loadMissing(['author', 'topics']))
+                ->response();
         } catch (\Throwable $th) {
             $this->error($th);
         }
@@ -67,7 +69,9 @@ class ArticleController extends Controller
     public function update(ArticleUpdateRequest $request, Article $article)
     {
         try {
-            return ArticleResource::make($this->service->update($request->validated(), $article))
+            $article = $this->service->update($request->validated(), $article);
+
+            return ArticleResource::make($article->loadMissing(['author', 'topics']))
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('article'), 'action' => __('updated')]
@@ -84,7 +88,9 @@ class ArticleController extends Controller
     public function destroy(ArticleDestroyRequest $request, Article $article)
     {
         try {
-            return ArticleResource::make($this->service->destroy($article))
+            $this->service->destroy($article);
+
+            return ArticleResource::make($article->loadMissing(['author', 'topics']))
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('article'), 'action' => __('deleted')]

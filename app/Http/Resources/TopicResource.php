@@ -19,7 +19,8 @@ class TopicResource extends JsonResource
             'name' => $this->name,
             'title' => $this->title,
             'description' => $this->description,
-            // 'user' => $this->user_id,
+            'user' => UserResource::make($this->whenLoaded('user')),
+            'articles' => TopicResource::collection($this->whenLoaded('articles')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

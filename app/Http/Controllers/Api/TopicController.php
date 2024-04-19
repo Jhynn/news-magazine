@@ -43,7 +43,7 @@ class TopicController extends Controller
         try {
             $payload = $this->service->store($request->validated());
 
-            return TopicResource::make($payload)
+            return TopicResource::make($payload->loadMissing(['user', 'articles']))
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('topic'), 'action' => __('created')]
@@ -62,7 +62,8 @@ class TopicController extends Controller
         try {
             $payload = $this->service->show($topic);
 
-            return TopicResource::make($payload)->response();
+            return TopicResource::make($payload->loadMissing(['user', 'articles']))
+                ->response();
         } catch (Throwable $th) {
             return $this->error($th);
         }
@@ -76,7 +77,7 @@ class TopicController extends Controller
         try {
             $payload = $this->service->update($request->validated(), $topic);
 
-            return TopicResource::make($payload)
+            return TopicResource::make($payload->loadMissing(['user', 'articles']))
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('topic'), 'action' => __('updated')]
@@ -95,7 +96,7 @@ class TopicController extends Controller
         try {
             $payload = $this->service->destroy($topic);
 
-            return TopicResource::make($payload)
+            return TopicResource::make($payload->loadMissing(['user', 'articles']))
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('topic'), 'action' => __('deleted')]

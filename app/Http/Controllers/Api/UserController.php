@@ -43,7 +43,7 @@ class UserController extends Controller
         try {
             $payload = $this->service->store($request->validated());
 
-            return UserResource::make($payload)
+            return UserResource::make($payload->loadMissing(['topics', 'articles']))
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('user'), 'action' => __('created')]
@@ -57,12 +57,13 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UserShowRequest $request, User $User)
+    public function show(UserShowRequest $request, User $user)
     {
         try {
-            $payload = $this->service->show($User);
+            $payload = $this->service->show($user);
 
-            return UserResource::make($payload)->response();
+            return UserResource::make($payload->loadMissing(['topics', 'articles']))
+                ->response();
         } catch (Throwable $th) {
             return $this->error($th);
         }
@@ -71,12 +72,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserUpdateRequest $request, User $User)
+    public function update(UserUpdateRequest $request, User $user)
     {
         try {
-            $payload = $this->service->update($request->validated(), $User);
+            $payload = $this->service->update($request->validated(), $user);
 
-            return UserResource::make($payload)
+            return UserResource::make($payload->loadMissing(['topics', 'articles']))
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('user'), 'action' => __('updated')]
@@ -90,10 +91,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserDestroyRequest $request, User $User)
+    public function destroy(UserDestroyRequest $request, User $user)
     {
         try {
-            $payload = $this->service->destroy($User);
+            $payload = $this->service->destroy($user);
 
             return UserResource::make($payload)
                 ->additional([
@@ -104,5 +105,13 @@ class UserController extends Controller
         } catch (Throwable $th) {
             return $this->error($th);
         }
+    }
+
+    public function me()
+    {
+        /** @var $user \App\Models\User */
+        $user = auth()->user();
+
+        return UserResource::make($user->loadMissing(['topics', 'articles']));
     }
 }

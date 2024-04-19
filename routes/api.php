@@ -28,5 +28,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::apiResource('/topics', TopicController::class);
     Route::apiResource('/articles', ArticleController::class);
+
+    Route::get('/users/me', [UserController::class, 'me']);
     Route::apiResource('/users', UserController::class);
 });

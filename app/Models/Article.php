@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{
+    BelongsTo,
+    BelongsToMany
+};
 
 class Article extends Model
 {
@@ -18,11 +20,11 @@ class Article extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function topics(): HasMany
+    public function topics(): BelongsToMany
     {
-        return $this->hasMany(Topic::class);
+        return $this->belongsToMany(Topic::class);
     }
 }
