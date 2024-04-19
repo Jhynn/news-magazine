@@ -6,5 +6,7 @@
     "success": "success",
 
     "article": "article",
-    "the :resource was :action|the :resource were :action": "the :resource was :action|the :resource were :action"
+    "the :resource was :action|the :resource were :action": "the :resource was :action|the :resource were :action",
+
+    "user": "user"
 }

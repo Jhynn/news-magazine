@@ -3,7 +3,8 @@
 use App\Http\Controllers\Api\{
     ArticleController,
     AuthController,
-    TopicController
+    TopicController,
+    UserController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,5 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::apiResource('/topics', TopicController::class);
     Route::apiResource('/articles', ArticleController::class);
+    Route::apiResource('/users', UserController::class);
 });
