@@ -14,6 +14,15 @@ class ArticleResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'content' => $this->content,
+            'user' => $this->author(),
+            // 'author' => new UserResource($this->whenLoaded('user')),
+            // 'topics' => TopicResource::collection($this->whenLoaded('topics')),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ];
     }
 }
