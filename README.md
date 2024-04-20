@@ -31,11 +31,11 @@ That's the backend for a news manager system, this manager covers all the essent
     - [x] Create new topics
     - [x] Edit the topics once created by them
     - [x] (Un)link their own news-article to topics
-- [ ] News
+- [x] News
     - [x] Create a new article
     - [x] Browser on their own catalog
     - [x] Edit their own news articles
-    - [ ] Remove their own news articles
+    - [x] Remove their own news articles
     - [x] Filter their news article by 
         - [x] Topics
         - [x] Date interval
