@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\{
 };
 use Symfony\Component\HttpFoundation\Response;
 
-class CurrentLocation
+class CurrentLocationMiddleware
 {
     /**
      * Handle an incoming request.

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Cors
+class ActiveUsersMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,11 @@ class Cors
      */
     public function handle(Request $request, Closure $next): Response
     {
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Origin, Authorization, Content-Type, X-Auth-Token');
-        header('Access-Control-Allow-Credentials: true');
+        if (auth()->check() && auth()->user()->status != 'active')
+            throw new \Exception(
+                __('you have been deactivated, please contact the administration'), 
+                403 // Forbidden.
+            );
 
         return $next($request);
     }

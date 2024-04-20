@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Middleware\{
-    ActiveUsers,
-    Cors,
-    CurrentLocation
+    ActiveUsersMiddleware,
+    CorsMiddleware,
+    CurrentLocationMiddleware
 };
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,9 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append([
-            // ActiveUsers::class,
-            Cors::class,
-            CurrentLocation::class,
+            // ActiveUsersMiddleware::class,
+            CorsMiddleware::class,
+            CurrentLocationMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
