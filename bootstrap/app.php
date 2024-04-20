@@ -18,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append([
-            ActiveUsers::class,
+            // ActiveUsers::class,
             Cors::class,
             CurrentLocation::class,
         ]);

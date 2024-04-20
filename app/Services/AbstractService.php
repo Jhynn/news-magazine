@@ -25,7 +25,7 @@ class AbstractService implements ServiceInterface
 	 */
 	public function index(Request $properties)
     {
-        return $this->model->paginate($properties['per_page'] ?? 15);
+        return $this->model->paginate($properties->query('per_page') ?? 15);
     }
 
 	/**

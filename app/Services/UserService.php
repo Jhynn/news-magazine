@@ -26,7 +26,7 @@ class UserService extends AbstractService
 				'name',
 			])
 			->defaultSort('-updated_at')
-			->paginate($properties['per_page'])
+			->paginate($properties->query('per_page'))
 			->appends($properties->query());
 
 		return $payload;
