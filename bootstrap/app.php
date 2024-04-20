@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Middleware\{
-    ActiveUsersMiddleware,
     CorsMiddleware,
     CurrentLocationMiddleware
 };
@@ -18,7 +17,6 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append([
-            // ActiveUsersMiddleware::class,
             CorsMiddleware::class,
             CurrentLocationMiddleware::class,
         ]);

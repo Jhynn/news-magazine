@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Topic;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -12,7 +13,7 @@ class TopicService extends AbstractService
 	/** @var string $model */
 	protected $model = Topic::class;
 
-	public function index(\Illuminate\Http\Request $properties)
+	public function index(\Illuminate\Http\Request $properties): LengthAwarePaginator
 	{
 		$payload = QueryBuilder::for($this->model)
 			->with([
@@ -55,6 +56,15 @@ class TopicService extends AbstractService
 
 	public function update(array $properties, int|Model $resource): Model|null
 	{
+		/** @var \App\Models\User $user */
+		$user = auth()->user();
+		$id = $properties['id'];
+
+		if (auth()->check() && $user->hasRole('writer') && ! $user->topics()->findOr($id, function() {
+			return false;
+		}))
+			throw new \Exception(__('you are not allowed to update this :resource', ['resource' => __('topic')]), 403);
+
 		$resource->update($properties);
 		$resource->articles()->sync($properties['articles']);
 		$resource = $this->show($resource);

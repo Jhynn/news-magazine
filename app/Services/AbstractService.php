@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\ServiceInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ class AbstractService implements ServiceInterface
     /**
 	 * @inheritDoc 
 	 */
-	public function index(Request $properties)
+	public function index(Request $properties): LengthAwarePaginator
     {
         return $this->model->paginate($properties->query('per_page') ?? 15);
     }

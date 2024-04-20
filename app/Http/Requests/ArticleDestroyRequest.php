@@ -11,7 +11,10 @@ class ArticleDestroyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check() && auth()->user()->can('article_delete');
+        /** @var \App\Models\User */
+        $user = auth()->user();
+
+        return auth()->check() && $user->can('article_delete');
     }
 
     /**

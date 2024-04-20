@@ -5,10 +5,13 @@
 
     "success": "success",
 
+    "topic": "topic",
     "article": "article",
+
     "the :resource was :action|the :resource were :action": "the :resource was :action|the :resource were :action",
 
     "user": "user",
     "you have been deactivated, please contact the administration": "you have been deactivated, please contact the administration",
+    "you are not allowed to update this :resource": "you are not allowed to update this :resource",
     "": ""
 }

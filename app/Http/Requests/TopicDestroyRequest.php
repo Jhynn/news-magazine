@@ -11,7 +11,10 @@ class TopicDestroyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check() && auth()->user()->can('user_delete');
+        /** @var \App\Models\User */
+        $user = auth()->user();
+
+        return auth()->check() && $user->can('topic_delete');
     }
 
     /**

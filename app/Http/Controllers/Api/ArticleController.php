@@ -69,7 +69,10 @@ class ArticleController extends Controller
     public function update(ArticleUpdateRequest $request, Article $article)
     {
         try {
-            $article = $this->service->update($request->validated(), $article);
+            $payload = $request->validated();
+            $payload['id'] = $article->id;
+
+            $article = $this->service->update($payload, $article);
 
             return ArticleResource::make($article->loadMissing(['author', 'topics']))
                 ->additional([

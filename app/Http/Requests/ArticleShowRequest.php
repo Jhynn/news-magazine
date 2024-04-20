@@ -11,7 +11,7 @@ class ArticleShowRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check() && auth()->user()->can('article_read');
+        return true;
     }
 
     /**

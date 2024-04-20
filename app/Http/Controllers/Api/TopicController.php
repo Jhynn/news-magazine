@@ -75,7 +75,10 @@ class TopicController extends Controller
     public function update(TopicUpdateRequest $request, Topic $topic)
     {
         try {
-            $payload = $this->service->update($request->validated(), $topic);
+            $payload = $request->validated();
+            $payload['id'] = $topic->id;
+
+            $payload = $this->service->update($payload, $topic);
 
             return TopicResource::make($payload)
                 ->additional([

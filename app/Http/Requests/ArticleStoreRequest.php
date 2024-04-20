@@ -11,7 +11,10 @@ class ArticleStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check() && auth()->user()->can('article_create');
+        /** @var \App\Models\User */
+        $user = auth()->user();
+
+        return auth()->check() && $user->can('article_create');
     }
 
     /**
