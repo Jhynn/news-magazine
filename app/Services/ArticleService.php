@@ -29,6 +29,9 @@ class ArticleService extends AbstractService
 				'author',
 				'topics',
 			])
+			->when($user->hasRole(['admin', 'dev']), function(Builder $query) {
+				$query->withTrashed();
+			})
 			->when($user->hasRole('writer'), function(Builder $query) use ($user) {
 				$query->where('user_id', $user->id);
 			})

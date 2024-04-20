@@ -2,8 +2,14 @@
 
 namespace App\Providers;
 
-use App\Models\Topic;
-use App\Observers\TopicObserver;
+use App\Models\{
+    Article,
+    Topic
+};
+use App\Observers\{
+    ArticleObserver,
+    TopicObserver
+};
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
     {
         // Obserservers
         Topic::observe(TopicObserver::class);
+        Article::observe(ArticleObserver::class);
     }
 }
