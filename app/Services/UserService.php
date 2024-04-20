@@ -2,11 +2,15 @@
 
 namespace App\Services;
 
+use App\Http\Filers\UserTypeFilter;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\{
+    AllowedFilter,
+    QueryBuilder
+};
 
 class UserService extends AbstractService
 {
@@ -21,6 +25,7 @@ class UserService extends AbstractService
 				'surname',
 				'email',
 				'username',
+				AllowedFilter::custom('type', new UserTypeFilter()),
 			])
 			->allowedSorts([
 				'updated_at',
