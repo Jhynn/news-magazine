@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/revoke-all-tokens', 'revokeAllMyTokens');
     });
 
-    Route::apiResource('/topics', TopicController::class);
+    Route::apiResource('/topics', TopicController::class)->withTrashed(['show', 'update']);
     Route::apiResource('/articles', ArticleController::class);
 
     Route::get('/users/me', [UserController::class, 'me']);

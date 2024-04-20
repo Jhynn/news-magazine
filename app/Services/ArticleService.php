@@ -34,6 +34,7 @@ class ArticleService extends AbstractService
 			})
 			->when($user->hasRole('writer'), function(Builder $query) use ($user) {
 				$query->where('user_id', $user->id);
+				$query->withTrashed();
 			})
 			->allowedFilters([
 				'id',
@@ -72,7 +73,7 @@ class ArticleService extends AbstractService
 		]);
 	}
 
-	public function update(array $properties, int|Model $resource): Model|null
+	public function update(array $properties, int|Model $resource): Article|null
 	{
 		/** @var \App\Models\User $user */
 		$user = auth()->user();
@@ -83,10 +84,13 @@ class ArticleService extends AbstractService
 		}))
 			throw new \Exception(__('you are not allowed to update this :resource', ['resource' => __('article')]), 403);
 
+		if ($resource->trashed())
+			$resource->restore();
+
 		$resource->update($properties);
 		$resource->topics()->sync($properties['topics']);
 		$resource = $this->show($resource);
-		
+
         return $resource;
 	}
 }
