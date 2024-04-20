@@ -20,7 +20,7 @@ class TopicResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'user' => UserResource::make($this->whenLoaded('user')),
-            'articles' => TopicResource::collection($this->whenLoaded('articles')),
+            'articles' => ArticleResource::collection($this->whenLoaded('articles')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

@@ -24,6 +24,7 @@ class TopicStoreRequest extends FormRequest
         return [
             'title' => 'required|string',
             'description' => 'required|string',
+            'articles' => 'sometimes|array',
         ];
     }
 }

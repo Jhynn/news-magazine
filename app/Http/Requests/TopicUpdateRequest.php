@@ -24,6 +24,7 @@ class TopicUpdateRequest extends FormRequest
         return [
             'title' => 'sometimes|string',
             'description' => 'sometimes|string',
+            'articles' => 'sometimes|array',
         ];
     }
 }
