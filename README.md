@@ -6,11 +6,11 @@ That's the backend for a news manager system, this manager covers all the essent
 
 ### Readers can:
 
-- [ ] Topics
-    - [ ] Browser on the catalog
-    - [ ] Filter news by desired topics
-- [ ] News
-    - [ ] Browser on the catalog
+- [ x ] Topics
+    - [ x ] Browser on the catalog
+    - [ x ] Get the most recent news from a topic
+- [ x ] News
+    - [ x ] Browser on the catalog
     - [ ] Filter news by 
         - [ ] Desired topics
         - [ ] Desired authors
