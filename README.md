@@ -15,9 +15,9 @@ That's the backend for a news manager system, this manager covers all the essent
         - [x] Desired topics
         - [x] Desired authors
         - [x] Date interval
-- [ ] Authors
-    - [ ] Browser on the catalog
-    - [ ] See the news by the author
+- [x] Authors
+    - [x] Browser on the catalog
+    - [x] Get the most recent news from an author
 - [ ] Search simultaneously for authors, topics and news
 - [ ] Comments
     - [ ] See comments from several social networks
@@ -30,10 +30,10 @@ That's the backend for a news manager system, this manager covers all the essent
     - [x] Browser on the catalog
     - [x] Create new topics
     - [ ] Edit the topics once created by them
-    - [ ] (Un)link a news-article to topics
+    - [ ] (Un)link their own news-article to topics
 - [ ] News
     - [x] Create a new article
-    - [x] Browser on their own catalog
+    - [ ] Browser on their own catalog
     - [ ] Edit their own news articles
     - [ ] Remove their own news articles
     - [ ] Filter their news article by 
@@ -63,10 +63,10 @@ That's the backend for a news manager system, this manager covers all the essent
     - [ ] The most popular
         - [ ] Filter by a date interval
 - [ ] Authors
-    - [ ] Browser on the catalog
+    - [x] Browser on the catalog
     - [ ] Create a new author
     - [ ] Activate or deactivate an author
-    - [ ] See the news articles' author
+    - [x] See the news articles' author
     - [ ] The most popular
         - [ ] Filter by a date interval
 - [ ] Search simultaneously for authors, topics and news
