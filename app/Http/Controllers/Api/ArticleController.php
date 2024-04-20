@@ -28,7 +28,7 @@ class ArticleController extends Controller
         try {
             return ArticleResource::collection($this->service->index($request))->response();
         } catch (\Throwable $th) {
-            $this->error($th);
+            return $this->error($th);
         }
     }
 
@@ -46,7 +46,7 @@ class ArticleController extends Controller
                     )
                 ])->response();
         } catch (\Throwable $th) {
-            $this->error($th);
+            return $this->error($th);
         }
     }
 
@@ -59,7 +59,7 @@ class ArticleController extends Controller
             return ArticleResource::make($article->loadMissing(['author', 'topics']))
                 ->response();
         } catch (\Throwable $th) {
-            $this->error($th);
+            return $this->error($th);
         }
     }
 
@@ -81,7 +81,7 @@ class ArticleController extends Controller
                     )
                 ])->response();
         } catch (\Throwable $th) {
-            $this->error($th);
+            return $this->error($th);
         }
     }
 
@@ -100,7 +100,7 @@ class ArticleController extends Controller
                     )
                 ])->response();
         } catch (\Throwable $th) {
-            $this->error($th);
+            return $this->error($th);
         }
     }
 }

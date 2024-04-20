@@ -26,6 +26,8 @@ trait ApiCommonResponses
     {
         $code = $e->getCode();
 
+        logger()->error($e->getMessage());
+
         return response()->json([
             'message' => $e->getMessage(),
         ], (gettype($code) == 'integer' && $code != 0) ? $code : Response::HTTP_BAD_REQUEST);

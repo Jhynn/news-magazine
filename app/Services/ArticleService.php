@@ -79,11 +79,11 @@ class ArticleService extends AbstractService
 		$user = auth()->user();
 		$id = $properties['id'];
 
-		if (auth()->check() && $user->hasRole('writer') && ! $user->articles()->findOr($id, function() {
+		if (auth()->check() && $user->hasRole('writer') && $user->articles()->findOr($id, function() {
 			return false;
 		}))
 			throw new \Exception(__('you are not allowed to update this :resource', ['resource' => __('article')]), 403);
-
+		
 		if ($resource->trashed())
 			$resource->restore();
 
