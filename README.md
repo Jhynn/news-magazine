@@ -64,11 +64,14 @@ That's the backend for a news manager system, this manager covers all the essent
         - [ ] Filter by a date interval
 - [ ] Authors
     - [x] Browser on the catalog
-    - [ ] Create a new author
-    - [ ] Activate or deactivate an author
+    - [x] Create a new user
+    - [x] Activate or deactivate an user
     - [x] See the news articles' author
     - [ ] The most popular
         - [ ] Filter by a date interval
+- [ ] Roles
+    - [ ] Create roles
+    - [ ] Assign permissions to roles
 - [ ] Search simultaneously for authors, topics and news
 - [ ] Statistics
     - [ ] Given a time interval, you can see

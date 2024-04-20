@@ -30,6 +30,7 @@ class UserUpdateRequest extends FormRequest
             'email' => 'sometimes|string',
             'username' => 'sometimes|string',
             'password' => 'sometimes|confirmed|string',
+            'role' => 'sometimes|string',
             'middle_name' => 'sometimes|string',
             'bio' => 'sometimes|string',
         ];

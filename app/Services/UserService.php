@@ -38,6 +38,14 @@ class UserService extends AbstractService
 		return $payload;
 	}
 
+	public function store(array $properties): Model|null
+    {
+        $tmp = User::create($properties);
+		$tmp->assignRole($properties['role']);
+
+        return $tmp;
+    }
+
 	public function show(int|Model $resource): Model|null
 	{
 		if (gettype($resource) == 'integer')
@@ -48,4 +56,24 @@ class UserService extends AbstractService
 			'topics' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),
 		]);
 	}
+
+	public function update(array $properties, int|Model $resource): Model|null
+    {
+        $tmp = $this->show($resource);
+        $tmp->update($properties);
+
+		if (isset($properties['role']))
+			$tmp->assignRole($properties['role']);
+
+        return $tmp;
+    }
+
+	public function destroy(int|Model $resource, array $aux=null): User|null
+    {
+        $tmp = $this->show($resource);
+        ($tmp->status == 'active') ? ($tmp->status = 'inactive') : ($tmp->status = 'active');
+		$tmp->save();
+
+        return $tmp;
+    }
 }
