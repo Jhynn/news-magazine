@@ -36,9 +36,9 @@ That's the backend for a news manager system, this manager covers all the essent
     - [x] Browser on their own catalog
     - [x] Edit their own news articles
     - [ ] Remove their own news articles
-    - [ ] Filter their news article by 
-        - [ ] Topics
-        - [ ] Date interval
+    - [x] Filter their news article by 
+        - [x] Topics
+        - [x] Date interval
 - [ ] Profile
     - [x] Create a bio
     - [ ] Upload an image

@@ -23,7 +23,7 @@ class AuthStoreRequest extends FormRequest
     {
         return [
             'email_or_username' => 'required|string',
-            'password' => 'required|confirmed|string',
+            'password' => 'required|string',
         ];
     }
 }

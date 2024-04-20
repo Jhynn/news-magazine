@@ -21,11 +21,17 @@ class ArticleService extends AbstractService
 
 	public function index(\Illuminate\Http\Request $properties): LengthAwarePaginator
 	{
+		/** @var \App\Models\User $user */
+		$user = auth()->user();
+
 		$payload = QueryBuilder::for($this->model)
 			->with([
 				'author',
 				'topics',
 			])
+			->when($user->hasRole('writer'), function(Builder $query) use ($user) {
+				$query->where('user_id', $user->id);
+			})
 			->allowedFilters([
 				'id',
 				'title',

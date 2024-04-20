@@ -15,11 +15,17 @@ class TopicService extends AbstractService
 
 	public function index(\Illuminate\Http\Request $properties): LengthAwarePaginator
 	{
+		/** @var \App\Models\User $user */
+		$user = auth()->user();
+
 		$payload = QueryBuilder::for($this->model)
 			->with([
 				'user',
 				'articles' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),
 			])
+			->when($user->hasRole('writer'), function(Builder $query) use ($user) {
+				$query->where('user_id', $user->id);
+			})
 			->allowedFilters([
 				'id',
 				'name',
@@ -46,7 +52,7 @@ class TopicService extends AbstractService
 		return $topic;
 	}
 
-	public function show(int|Model $resource): Model|null
+	public function show(int|Model $resource): Topic|null
 	{
 		if (gettype($resource) == 'integer')
 			$resource = Topic::firstOrFail($resource);
@@ -73,5 +79,23 @@ class TopicService extends AbstractService
 		$resource = $this->show($resource);
 		
         return $resource;
+	}
+
+	public function destroy(int|Model $resource, array $aux = null): Model|null
+	{
+		$tmp = $this->show($resource);
+
+		if ($tmp->articles()->count())
+			throw new \Exception(__(
+				'you cannot delete this :resource because it have :another_resource related', 
+				[
+					'resource' => __('topic'),
+					'another_resource' => __('articles'),
+				]
+			), 403);
+
+        $tmp->delete();
+
+        return $tmp;
 	}
 }
