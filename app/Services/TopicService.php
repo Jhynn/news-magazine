@@ -48,6 +48,9 @@ class TopicService extends AbstractService
 
 	public function show(int|Model $resource): Model|null
 	{
+		if (gettype($resource) == 'integer')
+			$resource = Topic::firstOrFail($resource);
+
 		return $resource->loadMissing([
 			'articles' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),
 			'user',

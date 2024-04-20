@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -11,7 +12,7 @@ class UserService extends AbstractService
 {
 	protected $model = User::class;
 
-	public function index(\Illuminate\Http\Request $properties)
+	public function index(\Illuminate\Http\Request $properties): LengthAwarePaginator
 	{
 		$payload = QueryBuilder::for($this->model)
 			->allowedFilters([
@@ -34,6 +35,9 @@ class UserService extends AbstractService
 
 	public function show(int|Model $resource): Model|null
 	{
+		if (gettype($resource) == 'integer')
+			$resource = User::firstOrFail($resource);
+
 		return $resource->loadMissing([
 			'articles' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),
 			'topics' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),

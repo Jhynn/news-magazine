@@ -12,7 +12,10 @@ class AuthService
 {
 	public function index(): array
     {
-        $tokens = auth()->user()->tokens()
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        $tokens = $user->tokens()
                 ->get()->map(function ($item) {
 
                     $aux = collect($item)
