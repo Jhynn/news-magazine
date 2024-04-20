@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\{
     ArticleController,
     AuthController,
+    RoleController,
     TopicController,
     UserController
 };
@@ -31,4 +32,6 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::get('/users/me', [UserController::class, 'me']);
     Route::apiResource('/users', UserController::class);
+
+    Route::apiResource('/roles', RoleController::class);
 });

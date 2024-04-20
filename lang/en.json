@@ -13,6 +13,9 @@
     "the :resource was :action|the :resource were :action": "the :resource was :action|the :resource were :action",
 
     "user|users": "user|users",
+    "role|roles": "role|roles",
+    "permission|permissions": "permission|permissions",
+
     "you have been deactivated, please contact the administration": "you have been deactivated, please contact the administration",
     "you are not allowed to update this :resource": "you are not allowed to update this :resource",
     "you cannot :action this :resource because it have :another_resource related": "you cannot :action this :resource because it have :another_resource related",
