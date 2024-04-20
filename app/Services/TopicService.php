@@ -87,8 +87,9 @@ class TopicService extends AbstractService
 
 		if ($tmp->articles()->count())
 			throw new \Exception(__(
-				'you cannot delete this :resource because it have :another_resource related', 
+				'you cannot :action this :resource because it have :another_resource related', 
 				[
+					'action' => __('delete'),
 					'resource' => __('topic'),
 					'another_resource' => __('articles'),
 				]
