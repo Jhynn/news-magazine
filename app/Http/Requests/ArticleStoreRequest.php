@@ -27,6 +27,7 @@ class ArticleStoreRequest extends FormRequest
         return [
             'title' => 'required|string',
             'content' => 'required|string',
+            'topics' => 'sometimes|array',
         ];
     }
 }

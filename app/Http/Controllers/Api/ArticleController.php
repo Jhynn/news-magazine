@@ -74,7 +74,7 @@ class ArticleController extends Controller
 
             $article = $this->service->update($payload, $article);
 
-            return ArticleResource::make($article->loadMissing(['author', 'topics']))
+            return ArticleResource::make($article)
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('article'), 'action' => __('updated')]

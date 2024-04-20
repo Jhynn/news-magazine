@@ -7,6 +7,7 @@ use App\Http\Filters\{
     ArticleInDateFilter
 };
 use App\Models\Article;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\QueryBuilder\{
@@ -51,6 +52,17 @@ class ArticleService extends AbstractService
 		return $user->articles()->create($properties);
 	}
 
+	public function show(int|Model $resource): Model|null
+	{
+		if (gettype($resource) == 'integer')
+			$resource = Article::firstOrFail($resource);
+
+		return $resource->loadMissing([
+			'topics' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),
+			'author',
+		]);
+	}
+
 	public function update(array $properties, int|Model $resource): Model|null
 	{
 		/** @var \App\Models\User $user */
@@ -63,7 +75,7 @@ class ArticleService extends AbstractService
 			throw new \Exception(__('you are not allowed to update this :resource', ['resource' => __('article')]), 403);
 
 		$resource->update($properties);
-		$resource->articles()->sync($properties['articles']);
+		$resource->topics()->sync($properties['topics']);
 		$resource = $this->show($resource);
 		
         return $resource;

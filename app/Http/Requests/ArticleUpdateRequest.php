@@ -27,6 +27,7 @@ class ArticleUpdateRequest extends FormRequest
         return [
             'title' => 'sometimes|string',
             'content' => 'sometimes|string',
+            'topics' => 'sometimes|array',
         ];
     }
 }
