@@ -11,10 +11,10 @@ That's the backend for a news manager system, this manager covers all the essent
     - [ x ] Get the most recent news from a topic
 - [ x ] News
     - [ x ] Browser on the catalog
-    - [ ] Filter news by 
-        - [ ] Desired topics
-        - [ ] Desired authors
-        - [ ] Date interval
+    - [ x ] Filter news by 
+        - [ x ] Desired topics
+        - [ x ] Desired authors
+        - [ x ] Date interval
 - [ ] Authors
     - [ ] Browser on the catalog
     - [ ] See the news by the author
@@ -27,39 +27,39 @@ That's the backend for a news manager system, this manager covers all the essent
 ### Writers can:
 
 - [ ] Topics
-    - [ ] Browser on the catalog
-    - [ ] Create new topics
+    - [ x ] Browser on the catalog
+    - [ x ] Create new topics
     - [ ] Edit the topics once created by them
     - [ ] (Un)link a news-article to topics
 - [ ] News
-    - [ ] Create a new article
-    - [ ] Browser on their own catalog
+    - [ x ] Create a new article
+    - [ x ] Browser on their own catalog
     - [ ] Edit their own news articles
     - [ ] Remove their own news articles
     - [ ] Filter their news article by 
         - [ ] Topics
         - [ ] Date interval
 - [ ] Profile
-    - [ ] Create a bio
+    - [ x ] Create a bio
     - [ ] Upload an image
 
 ### Administrators can:
 
 - [ ] Topics
-    - [ ] Browser on the catalog
-    - [ ] Create new topics
-    - [ ] Edit any topic
-    - [ ] Remove any topic
-    - [ ] (Un)link any news-article to topics
+    - [ x ] Browser on the catalog
+    - [ x ] Create new topics
+    - [ x ] Edit any topic
+    - [ x ] Remove any topic
+    - [ x ] (Un)link any news-article to topics
     - [ ] The most popular
         - [ ] Filter by a date interval
 - [ ] News
-    - [ ] Browser on the catalog
-    - [ ] Remove any news article
-    - [ ] Filter news by 
-        - [ ] Desired topics
-        - [ ] Desired authors
-        - [ ] Date interval
+    - [ x ] Browser on the catalog
+    - [ x ] Remove any news article
+    - [ x ] Filter news by 
+        - [ x ] Desired topics
+        - [ x ] Desired authors
+        - [ x ] Date interval
     - [ ] The most popular
         - [ ] Filter by a date interval
 - [ ] Authors
