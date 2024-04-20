@@ -6,15 +6,15 @@ That's the backend for a news manager system, this manager covers all the essent
 
 ### Readers can:
 
-- [ x ] Topics
-    - [ x ] Browser on the catalog
-    - [ x ] Get the most recent news from a topic
-- [ x ] News
-    - [ x ] Browser on the catalog
-    - [ x ] Filter news by 
-        - [ x ] Desired topics
-        - [ x ] Desired authors
-        - [ x ] Date interval
+- [x] Topics
+    - [x] Browser on the catalog
+    - [x] Get the most recent news from a topic
+- [x] News
+    - [x] Browser on the catalog
+    - [x] Filter news by 
+        - [x] Desired topics
+        - [x] Desired authors
+        - [x] Date interval
 - [ ] Authors
     - [ ] Browser on the catalog
     - [ ] See the news by the author
@@ -27,39 +27,39 @@ That's the backend for a news manager system, this manager covers all the essent
 ### Writers can:
 
 - [ ] Topics
-    - [ x ] Browser on the catalog
-    - [ x ] Create new topics
+    - [x] Browser on the catalog
+    - [x] Create new topics
     - [ ] Edit the topics once created by them
     - [ ] (Un)link a news-article to topics
 - [ ] News
-    - [ x ] Create a new article
-    - [ x ] Browser on their own catalog
+    - [x] Create a new article
+    - [x] Browser on their own catalog
     - [ ] Edit their own news articles
     - [ ] Remove their own news articles
     - [ ] Filter their news article by 
         - [ ] Topics
         - [ ] Date interval
 - [ ] Profile
-    - [ x ] Create a bio
+    - [x] Create a bio
     - [ ] Upload an image
 
 ### Administrators can:
 
 - [ ] Topics
-    - [ x ] Browser on the catalog
-    - [ x ] Create new topics
-    - [ x ] Edit any topic
-    - [ x ] Remove any topic
-    - [ x ] (Un)link any news-article to topics
+    - [x] Browser on the catalog
+    - [x] Create new topics
+    - [x] Edit any topic
+    - [x] Remove any topic
+    - [x] (Un)link any news-article to topics
     - [ ] The most popular
         - [ ] Filter by a date interval
 - [ ] News
-    - [ x ] Browser on the catalog
-    - [ x ] Remove any news article
-    - [ x ] Filter news by 
-        - [ x ] Desired topics
-        - [ x ] Desired authors
-        - [ x ] Date interval
+    - [x] Browser on the catalog
+    - [x] Remove any news article
+    - [x] Filter news by 
+        - [x] Desired topics
+        - [x] Desired authors
+        - [x] Date interval
     - [ ] The most popular
         - [ ] Filter by a date interval
 - [ ] Authors
