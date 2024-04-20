@@ -21,8 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
             ActiveUsers::class,
             Cors::class,
             CurrentLocation::class,
-        ])
-    )
+        ]);
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
