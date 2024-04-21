@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{
     BelongsTo,
-    BelongsToMany
+    BelongsToMany,
+    MorphMany
 };
 
 class Topic extends Model
@@ -26,5 +27,10 @@ class Topic extends Model
     public function articles(): BelongsToMany
     {
         return $this->belongsToMany(Article::class)->withTimestamps();
+    }
+
+    public function medias(): MorphMany
+    {
+        return $this->morphMany(Media::class, 'mediable');
     }
 }
