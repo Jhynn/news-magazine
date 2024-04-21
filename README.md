@@ -69,9 +69,9 @@ That's the backend for a news manager system, this manager covers all the essent
     - [x] See the news articles' author
     - [ ] The most popular
         - [ ] Filter by a date interval
-- [ ] Roles
-    - [ ] Create roles
-    - [ ] Assign permissions to roles
+- [x] Roles
+    - [x] Create roles
+    - [x] Assign permissions to roles
 - [ ] Search simultaneously for authors, topics and news
 - [ ] Statistics
     - [ ] Given a time interval, you can see

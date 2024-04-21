@@ -14,7 +14,7 @@ class RoleShowRequest extends FormRequest
         /** @var \App\Models\User */
         $user = auth()->user();
 
-        return auth()->check() && $user->can('role_show');
+        return auth()->check() && $user->can('role_read');
     }
 
     /**

@@ -12,7 +12,7 @@ use App\Http\Requests\{
 use App\Http\Resources\RoleResource;
 use App\Services\RoleService;
 use App\Traits\ApiCommonResponses;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
 use Throwable;
 
 class RoleController extends Controller
@@ -43,7 +43,7 @@ class RoleController extends Controller
         try {
             $payload = $this->service->store($request->validated());
 
-            return RoleResource::make($payload->loadMissing(['topics', 'articles']))
+            return RoleResource::make($payload->loadMissing(['permissions']))
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('role'), 'action' => __('created')]
@@ -62,7 +62,7 @@ class RoleController extends Controller
         try {
             $payload = $this->service->show($role);
 
-            return RoleResource::make($payload->loadMissing(['topics', 'articles']))
+            return RoleResource::make($payload->loadMissing(['permissions']))
                 ->response();
         } catch (Throwable $th) {
             return $this->error($th);
@@ -77,7 +77,7 @@ class RoleController extends Controller
         try {
             $payload = $this->service->update($request->validated(), $role);
 
-            return RoleResource::make($payload->loadMissing(['topics', 'articles']))
+            return RoleResource::make($payload->loadMissing(['permissions']))
                 ->additional([
                     'message' => __(
                         'the :resource was :action', ['resource' => __('role'), 'action' => __('updated')]

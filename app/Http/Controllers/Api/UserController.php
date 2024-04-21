@@ -112,6 +112,6 @@ class UserController extends Controller
         /** @var $user \App\Models\User */
         $user = auth()->user();
 
-        return UserResource::make($user->loadMissing(['topics', 'articles']));
+        return UserResource::make($user->loadMissing(['roles', 'topics', 'articles']));
     }
 }

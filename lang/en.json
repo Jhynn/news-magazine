@@ -19,5 +19,6 @@
     "you have been deactivated, please contact the administration": "you have been deactivated, please contact the administration",
     "you are not allowed to update this :resource": "you are not allowed to update this :resource",
     "you cannot :action this :resource because it have :another_resource related": "you cannot :action this :resource because it have :another_resource related",
+    "this :resource already exists": "this :resource already exists",
     "": ""
 }

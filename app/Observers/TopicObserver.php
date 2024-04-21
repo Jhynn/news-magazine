@@ -16,7 +16,7 @@ class TopicObserver
         });
 
         if ($aux)
-            throw new Exception('this topic already exists.', 400);
+            throw new Exception(__('this :resource already exists', ['resource' => __('topic')]), 400);
 
         $topic->name = $payload;
     }
@@ -37,7 +37,7 @@ class TopicObserver
         });
 
         if ($aux)
-            throw new Exception('this topic already exists.', 400);
+            throw new Exception(__('this :resource already exists', ['resource' => __('topic')]), 400);
 
         $topic->name = $payload;
     }

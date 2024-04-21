@@ -52,6 +52,8 @@ class UserService extends AbstractService
 			$resource = User::firstOrFail($resource);
 
 		return $resource->loadMissing([
+			'roles',
+			'permissions',
 			'articles' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),
 			'topics' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),
 		]);
