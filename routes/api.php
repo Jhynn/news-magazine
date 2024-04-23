@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\{
     ArticleController,
     AuthController,
+    PermissionController,
     RoleController,
     TopicController,
     UserController
@@ -35,6 +36,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('/users', UserController::class);
 
     Route::apiResource('/roles', RoleController::class);
+    Route::apiResource('/permissions', PermissionController::class);
     Route::apiResource('/medias', MediaController::class)->except('update');
     Route::post('/medias/{media}', [MediaController::class, 'update']);
 });
