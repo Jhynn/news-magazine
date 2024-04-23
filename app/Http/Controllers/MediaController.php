@@ -8,12 +8,7 @@ use App\Http\Requests\{
     MediaUpdateRequest
 };
 use App\Http\Resources\MediaResource;
-use App\Models\{
-    Article,
-    Media,
-    Topic,
-    User
-};
+use App\Models\Media;
 use App\Traits\ApiCommonResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,12 +16,6 @@ use Illuminate\Support\Facades\Storage;
 class MediaController extends Controller
 {
     use ApiCommonResponses;
-
-    const dict = [
-        'article' => Article::class,
-        'topic' => Topic::class,
-        'user' => User::class,
-    ];
 
     protected $storage;
 
@@ -55,17 +44,16 @@ class MediaController extends Controller
         try {
             $data = $request->validated();
             $data['mediable_id'] = $data['owner_id'];
-            $data['mediable_type'] = self::dict[strtolower($data['owner_type'])];
+            $data['mediable_type'] = Media::ownerType(strtolower($data['owner_type']));
 
             unset($data['media']);
 
             if ($request->hasFile('media')) {
-                $path = 'media/' . $request['mediable_id'];
+                $path = 'public/' . $data['owner_type'] . '-' . $data['owner_id'];
 
                 if (!$this->storage->exists($path))
                     $this->storage->makeDirectory($path);
 
-                // $this->storage->put($path, $request->file('media'));
                 $data['path'] = $request->media->store($path, 'local');
 
                 if (!str_contains($data['path'], $path))
@@ -105,10 +93,25 @@ class MediaController extends Controller
     {
         try {
             $data = $request->validated();
+
+            if (isset($data['owner_id']))
+                $data['mediable_id'] = $data['owner_id'];
+            else
+                $data['mediable_id'] = $media->mediable_id; 
+
+            if (isset($data['owner_type']))
+                $data['mediable_type'] = Media::ownerType(strtolower($data['owner_type']));
+            else {
+                $owner_type = $media->mediable_type;
+                $owner_type = strtolower(substr($owner_type, strrpos($owner_type, '\\') + 1));
+
+                $data['mediable_type'] = $owner_type; 
+            }
+
             unset($data['media']);
 
             if ($request->hasFile('media')) {
-                $path = 'media/' . $media->mediable_id;
+                $path = 'public/' . $data['mediable_type'] . '-' . $data['mediable_id'];
 
                 if ($this->storage->exists($media->path))
                     $this->storage->delete($media->path);

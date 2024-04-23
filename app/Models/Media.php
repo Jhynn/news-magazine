@@ -12,6 +12,16 @@ class Media extends Model
 {
     use HasFactory;
 
+    const ARTICLE = 'article';
+    const TOPIC = 'topic';
+    const USER = 'user';
+
+    const TYPES = [
+        self::ARTICLE => Article::class,
+        self::TOPIC => Topic::class,
+        self::USER => User::class,
+    ];
+
     protected $fillable = [
         'path',
         'mime_type',
@@ -26,7 +36,7 @@ class Media extends Model
     ];
 
     protected $appends = [
-        'link'
+        'link',
     ];
 
     public function mediable(): MorphTo
@@ -37,7 +47,25 @@ class Media extends Model
     protected function link(): Attribute
     {
         return Attribute::make(
-            get: fn () => (isset($this->attributes['path']) ? Storage::disk('public')->url($this->attributes['path']) : null)
+            get: function (){
+                $link = null;
+
+                if (isset($this->attributes['path'])) {
+                    /** @var Storage $storage */
+                    $storage = Storage::disk('public');
+                    $link = $storage->url($this->attributes['path']);
+                    $link = str_replace('public/', '', $link);
+                }
+
+                return $link;
+            }
         );
+    }
+
+    public static function ownerType(string $type=null): array|string
+    {
+        if (isset($type) && in_array($type, array_keys(self::TYPES))) return self::TYPES[$type];
+
+        return self::TYPES;
     }
 }

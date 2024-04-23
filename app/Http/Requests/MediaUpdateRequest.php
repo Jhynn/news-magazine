@@ -27,6 +27,8 @@ class MediaUpdateRequest extends FormRequest
         return [
             'media' => 'required|file',
             'mime_type' => 'required|string',
+            'owner_id' => 'sometimes|integer',
+            'owner_type' => 'sometimes|string',
             'metadata' => 'sometimes|json',
         ];
     }

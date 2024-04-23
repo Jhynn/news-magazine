@@ -35,5 +35,6 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('/users', UserController::class);
 
     Route::apiResource('/roles', RoleController::class);
-    Route::apiResource('/medias', MediaController::class);
+    Route::apiResource('/medias', MediaController::class)->except('update');
+    Route::post('/medias/{media}', [MediaController::class, 'update']);
 });
