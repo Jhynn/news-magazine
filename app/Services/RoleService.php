@@ -45,9 +45,7 @@ class RoleService extends AbstractService
 		if (gettype($resource) == 'integer')
 			$resource = Role::firstOrFail($resource);
 
-		return $resource->loadMissing([
-			'permissions',
-		]);
+		return $resource;
 	}
 
 	public function update(array $properties, int|Model $resource): Role|null

@@ -23,6 +23,7 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'bio' => $this->bio,
             'status' => $this->status,
+            'medias' => MediaResource::collection($this->whenLoaded('medias')),
             'roles' => RoleResource::collection($this->whenLoaded('roles')),
             'articles' => ArticleResource::collection($this->whenLoaded('articles')),
             'topics' => TopicResource::collection($this->whenLoaded('topics')),

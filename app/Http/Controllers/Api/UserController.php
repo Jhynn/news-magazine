@@ -109,9 +109,9 @@ class UserController extends Controller
 
     public function me()
     {
-        /** @var $user \App\Models\User */
+        /** @var \App\Models\User $user*/
         $user = auth()->user();
 
-        return UserResource::make($user->loadMissing(['roles', 'topics', 'articles']));
+        return UserResource::make($this->service->show($user));
     }
 }

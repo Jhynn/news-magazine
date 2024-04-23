@@ -32,7 +32,7 @@ class Media extends Model
 
     protected $casts = [
         'metadata' => 'array',
-        'attachmentable_id' => 'string',
+        'mediable_id' => 'int',
     ];
 
     protected $appends = [

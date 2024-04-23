@@ -19,6 +19,7 @@ class UserService extends AbstractService
 	public function index(\Illuminate\Http\Request $properties): LengthAwarePaginator
 	{
 		$payload = QueryBuilder::for($this->model)
+			->with('roles')
 			->allowedFilters([
 				'id',
 				'name',
@@ -53,7 +54,7 @@ class UserService extends AbstractService
 
 		return $resource->loadMissing([
 			'roles',
-			'permissions',
+			'medias' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),
 			'articles' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),
 			'topics' => fn (Builder $query) => $query->orderByDesc('updated_at')->limit(5),
 		]);
